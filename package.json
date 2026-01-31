@@ -16,20 +16,23 @@
     "dist": "electron-builder"
   },
 
-  "build": {
-    "appId": "com.deepak.imagetopdf",
-    "productName": "Image To PDF",
+ "build": {
+  "extends": null,
 
-    "files": [
-      "build/**/*",
-      "main.js",
-      "package.json"
-    ],
+  "appId": "com.deepak.imagetopdf",
+  "productName": "Image To PDF",
 
-    "asar": true,
+  "files": [
+    "build/**/*",
+    "main.js",
+    "package.json"
+  ],
 
-    "win": {
-      "target": "nsis"
-    }
+  "asar": true,
+
+  "win": {
+    "target": "nsis"
   }
+}
+
 }
