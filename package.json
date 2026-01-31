@@ -13,26 +13,31 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "electron": "electron .",
-    "dist": "electron-builder"
+    "dist": "electron-builder --config"
   },
 
- "build": {
-  "extends": null,
+  "build": {
+    "extends": null,
 
-  "appId": "com.deepak.imagetopdf",
-  "productName": "Image To PDF",
+    "appId": "com.deepak.imagetopdf",
+    "productName": "Image To PDF",
 
-  "files": [
-    "build/**/*",
-    "main.js",
-    "package.json"
-  ],
+    "directories": {
+      "app": "."
+    },
 
-  "asar": true,
+    "files": [
+      "build/**/*",
+      "main.js",
+      "package.json"
+    ],
 
-  "win": {
-    "target": "nsis"
+    "extraMetadata": {
+      "main": "main.js"
+    },
+
+    "win": {
+      "target": "nsis"
+    }
   }
-}
-
 }
