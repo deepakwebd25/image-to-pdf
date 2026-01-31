@@ -32,28 +32,19 @@
     "electron-builder": "^24.13.3"
   },
 
-  "build": {
-    "extends": null,
-
-    "appId": "com.deepak.imagetopdf",
-    "productName": "Image To PDF",
-
-    "directories": {
-      "app": "."
-    },
-
-    "files": [
-      "build/**/*",
-      "main.js",
-      "package.json"
-    ],
-
-    "extraMetadata": {
-      "main": "main.js"
-    },
-
-    "win": {
-      "target": "nsis"
-    }
+ "build": {
+  "extends": null,
+  "extraMetadata": {
+    "main": "main.js"
+  },
+  "files": [
+    "build/**/*",
+    "main.js",
+    "package.json"
+  ],
+  "win": {
+    "target": "nsis"
   }
+}
+
 }
