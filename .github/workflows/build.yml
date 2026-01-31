@@ -7,6 +7,7 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    timeout-minutes: 30   # ⬅️ prevents infinite hanging
 
     steps:
       - name: Checkout code
@@ -16,18 +17,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: "npm"   # ⬅️ important
 
-      - name: Install dependencies
-        run: npm install
+      - name: Clean install
+        run: |
+          npm cache clean --force
+          npm install --no-audit --no-fund
 
       - name: Build React
         run: npm run build
 
       - name: Build Electron EXE
-        run: npx electron-builder --config
+        run: npx electron-builder --config --win --x64
 
       - name: Upload EXE
         uses: actions/upload-artifact@v4
         with:
           name: ImageToPDF-EXE
-          path: dist/*.exe
+          path: dist/**/*.exe
