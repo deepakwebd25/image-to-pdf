@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
@@ -24,7 +24,7 @@ jobs:
         run: npm run build
 
       - name: Build Electron EXE
-        run: npm run dist
+        run: npx electron-builder --config
 
       - name: Upload EXE
         uses: actions/upload-artifact@v4
