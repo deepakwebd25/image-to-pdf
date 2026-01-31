@@ -2,36 +2,35 @@ name: Build Image to PDF EXE
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
     runs-on: windows-latest
-    timeout-minutes: 30   # ⬅️ prevents infinite hanging
+    timeout-minutes: 30
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: "npm"   # ⬅️ important
+          node-version: '18'
+          cache: 'npm'
 
-      - name: Clean install
-        run: |
-          npm cache clean --force
-          npm install --no-audit --no-fund
+      - name: Install dependencies
+        run: npm install
 
-      - name: Build React
+      - name: Build React app
         run: npm run build
 
-      - name: Build Electron EXE
-        run: npx electron-builder --config --win --x64
+      - name: Package Electron app
+        run: |
+          npx electron-builder --win --x64 --config.extraMetadata.main=main.js
 
-      - name: Upload EXE
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ImageToPDF-EXE
-          path: dist/**/*.exe
+          path: dist/*.exe
